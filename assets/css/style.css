@@ -6,7 +6,7 @@ main {
     display: flex;
     border: 1px solid black;
     justify-content: center;
-    align-items: center;
+    align-items:start;
 }
 
 
@@ -24,14 +24,20 @@ main {
     flex: 1;
 }
 
+#center section {
+    padding: 10px;
+    border: 2px solid red;
+    margin: 10px;
+}
 
-/* hide and diaply content */
-.hide {
+
+/* hide and display content */
+.hidden {
     display:none
 }
-.show {
+/* .show {
     display:block;
-}
+} */
 
 .question{
     border: 1px solid yellow;

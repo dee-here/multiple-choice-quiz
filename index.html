@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QUiz</title>
-    <link rel="stylesheet" href="./assets/reset.css">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <!-- <header> template!!
@@ -13,22 +13,31 @@
     <main class="">
         <section id="left">High Score link</section>
         <section id="center">
-            <item class="ques">
-                <h1 id="question-text"> Question text</h1>
-                <ul id="question-choices">
-                    <li>11</li>
-                    <li>22</li>
-                    <li>33</li>
-                    <li>44</li>
-                </ul>
-            </item>
+            <section id="start-screen" class="hidden">
+                <h1>Quiz</h1>
+                <p>Click on start to start the quiz.</p>
+                <button onclick="startQuiz()">Start Quiz</button>
+            </section>
+            <section id="question-screen" class="hidden">
+                <item class="question-container">
+                    <h1 id="question-text"> Question text</h1>
+                    <ul id="question-choices">
+                        <li>11</li>
+                        <li>22</li>
+                        <li>33</li>
+                        <li>44</li>
+                    </ul>
+                </item>
+            </section>
+            <section id="end-screen" class="hidden">End screen</section>
+            <section id="score-screen" class="hidden">Score screen</section>
         </section>
         <section id="right">
             <h1 class="time"></h1>
         </section>
     </main>
 
-    <script src="./assets/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
