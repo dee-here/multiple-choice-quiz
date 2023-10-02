@@ -192,22 +192,35 @@ function init() {
 function hideSection(section) {
   section.classList.toggle("hidden");
 }
+//function to toggle display of sections
+function toggleDisplayOfSection(section) {
+  section.classList.toggle("hidden");
+}
 
 //screens to hide/show
 function showStartScreen() {
-  hideSection(startScreenEl);
+  startScreenEl.classList.remove("hidden");
+  questionsScreenEl.classList.add("hidden");
+  endScreenEl.classList.add("hidden");
+  scoreScreenEl.classList.add("hidden");
 }
 function showQuestionScreen() {
-  hideSection(startScreenEl);
-  hideSection(questionsScreenEl);
+  startScreenEl.classList.add("hidden");
+  questionsScreenEl.classList.remove("hidden");
+  endScreenEl.classList.add("hidden");
+  scoreScreenEl.classList.add("hidden");
 }
 function showEndScreen() {
-  hideSection(questionsScreenEl);
-  hideSection(endScreenEl);
+  startScreenEl.classList.add("hidden");
+  questionsScreenEl.classList.add("hidden");
+  endScreenEl.classList.remove("hidden");
+  scoreScreenEl.classList.add("hidden");
 }
 function showScoresScreen() {
-  hideSection(endScreenEl);
-  hideSection(scoreScreenEl);
+  startScreenEl.classList.add("hidden");
+  questionsScreenEl.classList.add("hidden");
+  endScreenEl.classList.add("hidden");
+  scoreScreenEl.classList.remove("hidden");
 }
 
 //start the code
@@ -219,41 +232,21 @@ function handleAnswerClicks(li) {
   checkAnswer(li.getAttribute("data-choice"));
   // pass the data choice :check answer here 
   }
+
+function getCssClasses(id) {
+  console.log("id to hide/show : ", id, id.classList);
+}
+
+function isElementHidden(id) {
+if(getCssClasses(id).includes('hidden')){
+  console.log(" id: ", id, " is Hidden!!");
+} else {
+  console.log(console.log(" id: ", id, " is NOT HIDDEN!!"));
+}
+}
+function removeHiddenClassName(id) {
+  console.log(isElementHidden(id));
+  id.classList.remove('hidden');
+  console.log();
+}
   
-
-//psuedo code:
-//get a handle to all elements that need to be modified
-// time remaining
-// Questions choices and answers.
-//
-
-//how to save question, its choices and answers
-//create a var object?  or a class and create instances of it?
-
-// fn to start the game
-//start button:-> event listener or onClick() starts the game
-// questionIndex = 0;
-//showQuestion();
-//display first question
-// generate question section content  with event listeners and data attributes.
-
-// function to generate a text using question index
-// function displayQuestion() {
-//   //get a ahndle to dom elemnts that need to be created and appended.
-//   //have a handle to the element  change the html text content.
-//   console.log("displayQuestion");
-
-// }
-
-//event listners on buttons for answers: data-
-//if clicked button isnt matching the correct answer -
-// reduce time
-
-//if correct answer
-
-//display if answer was correct or wrong
-
-// check if game needs to contine
-//if game ended
-// show scores
-// take users initial and save score
