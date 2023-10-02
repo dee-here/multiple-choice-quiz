@@ -25,14 +25,14 @@ class Question {
 }
 
 var questionBank = [
- new Question("1", ['a1','b1', 'c', 'd1'], 0),
- new Question("2", ['a2','b2', 'c', 'd2'], 1),
- new Question("3", ['a3','b3', 'c', 'd3'], 2),
- new Question("4", ['a4','b4', 'c', 'd4'], 3),
- new Question("1123", ['a1','b1', 'c', 'd1'], 0),
- new Question("2123", ['a2','b2', 'c', 'd2'], 1),
- new Question("3231", ['a3','b3', 'c', 'd3'], 2),
- new Question("423", ['a4','b4', 'c', 'd4'], 3)
+  new Question("1", ["a1", "b1", "c", "d1"], "0"),
+  new Question("2", ["a2", "b2", "c", "d2"], "1"),
+  new Question("3", ["a3", "b3", "c", "d3"], "2"),
+  new Question("4", ["a4", "b4", "c", "d4"], "3"),
+  new Question("1123", ["a1", "b1", "c", "d1"], "0"),
+  new Question("2123", ["a2", "b2", "c", "d2"], "1"),
+  new Question("3231", ["a3", "b3", "c", "d3"], "2"),
+  new Question("423", ["a4", "b4", "c", "d4"], "3"),
 ];
 
 //  current question
@@ -41,16 +41,14 @@ var currentQuestion = questionBank[questionIndex];
 
 // timer !
 
-
 function setTimer() {
-
-  var timerInterval = setInterval(function() {
+  var timerInterval = setInterval(function () {
     console.log(`STarting time: ${timeLeft}`);
     timeLeft--;
 
     timeEl.textContent = "Time: " + timeLeft;
 
-    if(timeLeft === 0) {
+    if (timeLeft === 0) {
       //end game and take user to enter initial and save score.
       console.log("GAME ended as Timer = 0 !!");
       clearInterval(timerInterval);
@@ -61,27 +59,20 @@ function setTimer() {
       //call method to end game and display other screen to enetr score and initials.
     }
   }, 1000);
-
 }
 
 // end timer section
 //score is time remaining on timer !
 
-
-
 //fn to display question
 function showQuestions() {
-  //console.log('showQuestion', questionBank[questionIndex]); 
-  // start
-  // setTimer();
-
-  // showQuestionScreen();
-
   console.log("currentQuestion", currentQuestion);
-
+  currentQuestion = questionBank[questionIndex];
   //any more questions left?
-  moreQuestions();
-  createQuestionContent();
+  //moreQuestions() then create question
+  if(currentQuestion) {
+    createQuestionContent();
+  }
 
   //genegrate the h1 for question text and ul/ol with li for each option
   // add data-attribute
@@ -89,41 +80,38 @@ function showQuestions() {
 }
 
 function createQuestionContent() {
-  console.log("questionTextEl: ", questionTextEl);
   questionTextEl.textContent = currentQuestion.text;
 
-  console.log("questionchocicesEl: ", questionchoicesEl);
-  for(i=0; i< questionchoicesEl.length; i++){
+  for (i = 0; i < questionchoicesEl.length; i++) {
     questionchoicesEl[i].textContent = currentQuestion.choices[i];
-    questionchoicesEl[i].setAttribute('data-choice', i);
+    questionchoicesEl[i].setAttribute("data-choice", i);
 
-    //we should add check answers on each li element as a listeners for click !
-    // questionchoicesEl[i].addEventListener('click', checkAnswer);
-
-    questionchoicesEl[i].addEventListener('click', function(event) {
-      console.log("questionchoicesEl clicked is: ", event.target.getAttribute('data-choice'));
-      console.log("clicked target is: ", event.target);
-      checkAnswer(event.target.getAttribute('data-choice'));
-     // checkAnswer(questionchoicesEl[i]);
+    questionchoicesEl[i].addEventListener("click", function (event) {
+      checkAnswer(event.target.getAttribute("data-choice"));
     });
-
-    //checkAnswer(questionchoicesEl[i]);
   }
 }
 
-// function checkAnswer(liEl) {
-//   console.log("checkAnswer : ", liEl);
-//   console.log(liEl.getAttribute('data-choice'));
-//   console.log("checkAnswer : ", currentQuestion.answer);
-
-// }
-
 function checkAnswer(choice) {
-  console.log("checkAnswer : ", choice, currentQuestion.answer);
-  //console.log(liEl.getAttribute('data-choice'));
-  //check for triple!! or convert to same type!
-  console.log("checkAnswer : ", currentQuestion.answer == choice);
+  console.log(currentQuestion.answer === choice);
+  //return currentQuestion.answer === choice;
 
+  if(currentQuestion.answer === choice) {
+    //continue game and show next questions
+    console.log("correct answer!");
+  } else {
+    console.log("WRONG answer!");
+    timeLeft = timeLeft - 10;
+  }
+
+  if(!isGameOver()) {
+    nextQuestion();
+    showQuestions();
+  }
+
+  // while(!isGameOver()) {
+  //   showNextQuestion();
+  // }
 }
 
 //function to start quiz and display questions
@@ -138,22 +126,32 @@ function nextQuestion() {
   questionIndex++;
 }
 
-
 //function to check if there are more questions
 function moreQuestions() {
-  console.log('moreQuestions: ', questionIndex >= 0 && questionIndex < questionBank.length);
-  return (questionIndex >= 0 && questionIndex < questionBank.length);
+  return questionIndex >= 0 && questionIndex < (questionBank.length -1);
 }
 
-//reset question index
-function  resetQuestions() {
+//reset question index and other global varibales!
+function resetQuiz() {
   questionIndex = 0;
+  timeLeft = 30;
 }
-
 
 //fn to check if end of game
 function isGameOver() {
   //if timer ==- 0 or no more questions => Quiz over
+  console.log("is game over: ", timeLeft <= 0 || !moreQuestions());
+  return (timeLeft <= 0 || !moreQuestions());
+}
+
+function showNextQuestion() {
+  if(moreQuestions()) {
+    //move to next question
+    questionIndex++;
+    showQuestions();
+
+  }
+
 }
 
 //fn to display that game has ended and display users score!
@@ -161,70 +159,40 @@ function isGameOver() {
 
 //display saved high scores when user clicks on display high scores
 
-
 //fn to check answer maybe data attriobute of waht was clicked and match it with currentquestion.answer.
 
 function init() {
-  console.log("Start game clicked !! nothing should happen in iniit");
-  // setTimer();
+  console.log("Start game !! nothing should happen in iniit");
+  // resetQuiz();
   showStartScreen();
-  resetQuestions();
-  var currentQuestion = questionBank[questionIndex];
-  console.log("currentQuestion", currentQuestion);
-
-  // showStartScreen();
-  //Time should be set after user clicks on start
-  // setTimer();
-
+  // var currentQuestion = questionBank[questionIndex];
+  // console.log("currentQuestion", currentQuestion);
 }
-
-//when start button is clicked: setTimer, and start displaying questions
 
 //function to hide screens
 function hideSection(section) {
-  //DOM handle to element passed here
- //console.log("about to hide: ", section);
-  section.classList.toggle('hidden');
-  //section.classList.add('hidden');
-  // cons
+  section.classList.toggle("hidden");
 }
 
 //screens to hide/show
 function showStartScreen() {
   hideSection(startScreenEl);
-  //should we check if its already and then do these?
-  //hideSection(questionsScreenEl);
-  // hideSection(endScreenEl);
-  // hideSection(scoreScreenEl);
 }
 function showQuestionScreen() {
   hideSection(startScreenEl);
   hideSection(questionsScreenEl);
-  // hideSection(endScreenEl);
-  // hideSection(scoreScreenEl);
 }
 function showEndScreen() {
-  // hideSection(startScreenEl);
   hideSection(questionsScreenEl);
   hideSection(endScreenEl);
 }
 function showScoresScreen() {
-  // hideSection(startScreenEl);
-  // hideSection(questionsScreenEl);
   hideSection(endScreenEl);
   hideSection(scoreScreenEl);
 }
 
-
 //start the code
 init();
-
-
-
-
-
-
-
 
 //psuedo code:
 //get a handle to all elements that need to be modified
@@ -238,11 +206,9 @@ init();
 // fn to start the game
 //start button:-> event listener or onClick() starts the game
 // questionIndex = 0;
- //showQuestion();
+//showQuestion();
 //display first question
-  // generate question section content  with event listeners and data attributes.
-
-
+// generate question section content  with event listeners and data attributes.
 
 // function to generate a text using question index
 // function displayQuestion() {
