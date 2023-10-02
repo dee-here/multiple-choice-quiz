@@ -14,6 +14,7 @@ var questionchoicesEl = document.querySelectorAll("#question-choices li");
 
 // global variables.
 var timeLeft = 30;
+var score;
 
 // object to store question text, options and answer.
 class Question {
@@ -25,14 +26,14 @@ class Question {
 }
 
 var questionBank = [
-  new Question("Q:1", ["a1", "b1", "c1", "d1"], "0"),
-  new Question("Q:2", ["a2", "b2", "c2", "d2"], "1"),
-  new Question("Q:3", ["a3", "b3", "c3", "d3"], "2"),
-  new Question("Q:4", ["a4", "b4", "c4", "d4"], "3"),
-  new Question("Q:5", ["a5", "b1", "c5", "d5"], "0"),
-  new Question("Q:6", ["a6", "b2", "c6", "d6"], "1"),
-  new Question("Q:7", ["a7", "b3", "c7", "d7"], "2"),
-  new Question("Q:8", ["a8", "b4", "c8", "d8"], "3"),
+  new Question("Inside which HTML element do we put the JavaScript?", ["<js>", "<script>", "<javascript>", "<scripting>"], "1"),
+  new Question("Where is the correct place to insert a JavaScript?", ["header", "footer", "main", "body"], "3"),
+  new Question("How do you write 'Hello World' in an alert box", ["alert('Hello World')", "msgBox('Hello World')", "msg('Hello World')", "alerttBox('Hello World')"], "0"),
+  new Question("How to write an IF statement in Javascript", ["if(i==5)", "if i = 5 then", "if i == 5 then", "if i = 5"], "0"),
+  new Question("How do you round the number 7.25, to the nearest integer?", ["rnd(7.25)", "round(7.25)", "Math.round(7.25)", "Math.rnd(7.25)"], "2"),
+  new Question("How do you find the number with the highest value of x and y?", ["Math.ceil(x,y)", "Math.max(x,y)", "ceil(x,y)", "top(x,y)"], "1"),
+  new Question("Which of the following keywords is used to define a variable in Javascript?", ["get", "set", "char", "var"], "3"),
+  new Question("Everything in JavaScript is either a...", ["primitive or an object", "function or an object", "trick question", "number or object"], "0"),
 ];
 
 //  current question
@@ -44,7 +45,17 @@ var currentQuestion = questionBank[questionIndex];
 function setTimer() {
   var timerInterval = setInterval(function () {
     console.log(`STarting time: ${timeLeft}`);
-    timeLeft--;
+    if(moreQuestions() && timeLeft > 0) {
+      timeLeft--;
+      score = timeLeft;
+      timeEl.textContent = "Time: " + timeLeft;
+    } else {
+      console.log(`STarting time: ${timeLeft}`);
+      timeEl.textContent = "Score: " + score;
+      clearInterval(timerInterval);
+    }
+
+    console.log('score is: ', score);
 
     timeEl.textContent = "Time: " + timeLeft;
 
@@ -54,6 +65,7 @@ function setTimer() {
       clearInterval(timerInterval);
       //testing game end screen!
       //do things for ending game!!
+      //only show end screen if its hidden and has the class !
       showEndScreen();
 
       //call method to end game and display other screen to enetr score and initials.
@@ -94,15 +106,21 @@ function createQuestionContent() {
 }
 
 function checkAnswer(choice) {
-  console.log(currentQuestion.answer === choice);
+
   //return currentQuestion.answer === choice;
 
-  if(currentQuestion.answer === choice) {
+  if(currentQuestion && currentQuestion.answer === choice) {
     //continue game and show next questions
+    console.log(currentQuestion.answer === choice);
     console.log("correct answer!");
   } else {
     console.log("WRONG answer!");
-    timeLeft = timeLeft - 5;
+    if(timeLeft > 0 && (timeLeft -10) > 0) {
+      timeLeft = timeLeft - 10;
+    } else {
+      timeLeft = 0;
+    }
+    // timeLeft = timeLeft - 5;
   }
   if(!isGameOver()) {
     nextQuestion();
@@ -129,7 +147,7 @@ function nextQuestion() {
 
 //function to check if there are more questions
 function moreQuestions() {
-  return questionIndex >= 0 && questionIndex < (questionBank.length -1);
+  return (questionIndex >= 0 && questionIndex < (questionBank.length));
 }
 
 //reset question index and other global varibales!
