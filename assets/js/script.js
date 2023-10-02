@@ -13,7 +13,7 @@ var questionchoicesEl = document.querySelectorAll("#question-choices li");
 // var questionTextEl = document.querySelector("#question-text");
 
 // global variables.
-var timeLeft = 30;
+var timeLeft = 100;
 
 // object to store question text, options and answer.
 class Question {
@@ -25,14 +25,14 @@ class Question {
 }
 
 var questionBank = [
-  new Question("1", ["a1", "b1", "c", "d1"], "0"),
-  new Question("2", ["a2", "b2", "c", "d2"], "1"),
-  new Question("3", ["a3", "b3", "c", "d3"], "2"),
-  new Question("4", ["a4", "b4", "c", "d4"], "3"),
-  new Question("1123", ["a1", "b1", "c", "d1"], "0"),
-  new Question("2123", ["a2", "b2", "c", "d2"], "1"),
-  new Question("3231", ["a3", "b3", "c", "d3"], "2"),
-  new Question("423", ["a4", "b4", "c", "d4"], "3"),
+  new Question("Q: 1", ["a1", "b1", "c", "d1"], "0"),
+  new Question("Q: 2", ["a2", "b2", "c", "d2"], "0"),
+  new Question("Q: 3", ["a3", "b3", "c", "d3"], "2"),
+  new Question("Q: 4", ["a4", "b4", "c", "d4"], "3"),
+  new Question("Q: 5", ["a5", "b1", "c", "d1"], "0"),
+  new Question("Q: 6", ["a6", "b2", "c", "d2"], "1"),
+  new Question("Q: 7", ["a7", "b3", "c", "d3"], "2"),
+  new Question("Q: 8", ["a8", "b4", "c", "d4"], "3"),
 ];
 
 //  current question
@@ -43,8 +43,12 @@ var currentQuestion = questionBank[questionIndex];
 
 function setTimer() {
   var timerInterval = setInterval(function () {
-    console.log(`STarting time: ${timeLeft}`);
-    timeLeft--;
+    // console.log(`STarting time: ${timeLeft}`);
+
+    if(timeLeft > 0) {
+      timeLeft--;
+    }
+
 
     timeEl.textContent = "Time: " + timeLeft;
 
@@ -66,8 +70,9 @@ function setTimer() {
 
 //fn to display question
 function showQuestions() {
-  console.log("currentQuestion", currentQuestion);
+  // console.log("currentQuestion", currentQuestion);
   currentQuestion = questionBank[questionIndex];
+  console.log("currentQuestion", currentQuestion);
   //any more questions left?
   //moreQuestions() then create question
   if(currentQuestion) {
@@ -86,14 +91,32 @@ function createQuestionContent() {
     questionchoicesEl[i].textContent = currentQuestion.choices[i];
     questionchoicesEl[i].setAttribute("data-choice", i);
 
-    questionchoicesEl[i].addEventListener("click", function (event) {
-      checkAnswer(event.target.getAttribute("data-choice"));
-    });
+    if(i === 0) {
+      questionchoicesEl[i].addEventListener("click", function (event) {
+        console.log("Event target ! ",event.target);
+        checkAnswer(event.target.getAttribute("data-choice"));
+      });
+    }
+
+
+
+        //cehck if ebvent listeners are getting removed? 
+    //TODO
+    // questionchoicesEl[i].removeEventListener();
+    // console.log("questionchoicesEl[i] ", questionchoicesEl[i]);
+    // var newli = questionchoicesEl[i].cloneNode(true);
+    // questionchoicesEl[i].parentNode.replaceChild(newli, questionchoicesEl[i]);
   }
 }
 
+//need to remove listneres!!
+// function clickEventListener(event) {
+//   console.log("Event target ! ", event.target);
+//   checkAnswer(event.target.getAttribute("data-choice"));
+// }
+
 function checkAnswer(choice) {
-  console.log(currentQuestion.answer === choice);
+  console.log("check answer :",currentQuestion.answer === choice);
   //return currentQuestion.answer === choice;
 
   if(currentQuestion.answer === choice) {
@@ -104,7 +127,7 @@ function checkAnswer(choice) {
     timeLeft = timeLeft - 10;
   }
 
-  if(!isGameOver()) {
+  if(isGameOver()) {
     nextQuestion();
     showQuestions();
   }
@@ -123,7 +146,9 @@ function startQuiz() {
 }
 //fn to get next question
 function nextQuestion() {
+  console.log("nextQuestion : ", questionIndex);
   questionIndex++;
+  console.log('increased question index !', questionIndex);
 }
 
 //function to check if there are more questions
@@ -134,7 +159,7 @@ function moreQuestions() {
 //reset question index and other global varibales!
 function resetQuiz() {
   questionIndex = 0;
-  timeLeft = 30;
+  timeLeft = 100;
 }
 
 //fn to check if end of game
@@ -147,7 +172,8 @@ function isGameOver() {
 function showNextQuestion() {
   if(moreQuestions()) {
     //move to next question
-    questionIndex++;
+    console.log("showNextQuestion : ", moreQuestions() );
+    // questionIndex++;
     showQuestions();
 
   }
