@@ -25,14 +25,14 @@ class Question {
 }
 
 var questionBank = [
-  new Question("1", ["a1", "b1", "c", "d1"], "0"),
-  new Question("2", ["a2", "b2", "c", "d2"], "1"),
-  new Question("3", ["a3", "b3", "c", "d3"], "2"),
-  new Question("4", ["a4", "b4", "c", "d4"], "3"),
-  new Question("1123", ["a1", "b1", "c", "d1"], "0"),
-  new Question("2123", ["a2", "b2", "c", "d2"], "1"),
-  new Question("3231", ["a3", "b3", "c", "d3"], "2"),
-  new Question("423", ["a4", "b4", "c", "d4"], "3"),
+  new Question("Q:1", ["a1", "b1", "c1", "d1"], "0"),
+  new Question("Q:2", ["a2", "b2", "c2", "d2"], "1"),
+  new Question("Q:3", ["a3", "b3", "c3", "d3"], "2"),
+  new Question("Q:4", ["a4", "b4", "c4", "d4"], "3"),
+  new Question("Q:5", ["a5", "b1", "c5", "d5"], "0"),
+  new Question("Q:6", ["a6", "b2", "c6", "d6"], "1"),
+  new Question("Q:7", ["a7", "b3", "c7", "d7"], "2"),
+  new Question("Q:8", ["a8", "b4", "c8", "d8"], "3"),
 ];
 
 //  current question
@@ -82,7 +82,7 @@ function showQuestions() {
 function createQuestionContent() {
   questionTextEl.textContent = currentQuestion.text;
 
-  for (i = 0; i < questionchoicesEl.length; i++) {
+  for (let i = 0; i < questionchoicesEl.length; i++) {
     questionchoicesEl[i].textContent = currentQuestion.choices[i];
     questionchoicesEl[i].setAttribute("data-choice", i);
 
@@ -101,17 +101,13 @@ function checkAnswer(choice) {
     console.log("correct answer!");
   } else {
     console.log("WRONG answer!");
-    timeLeft = timeLeft - 10;
-  }
+    timeLeft = timeLeft - 5;
 
-  if(!isGameOver()) {
-    nextQuestion();
-    showQuestions();
-  }
-
-  // while(!isGameOver()) {
-  //   showNextQuestion();
+  // if(!isGameOver()) {
+  //   nextQuestion();
+  //   showQuestions();
   // }
+
 }
 
 //function to start quiz and display questions
