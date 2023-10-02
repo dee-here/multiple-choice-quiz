@@ -1,5 +1,6 @@
 // get handle to DOM elements
 var timeEl = document.querySelector(".time");
+var endScoreEl = document.querySelector("#end-score");
 
 //handle to different sections
 var startScreenEl = document.querySelector("#start-screen");
@@ -15,6 +16,10 @@ var questionchoicesEl = document.querySelectorAll("#question-choices li");
 // global variables.
 var timeLeft = 30;
 var score;
+//  current question
+var questionIndex = 0;
+//var currentQuestion = questionBank[questionIndex];
+
 
 // object to store question text, options and answer.
 class Question {
@@ -36,9 +41,6 @@ var questionBank = [
   new Question("Everything in JavaScript is either a...", ["primitive or an object", "function or an object", "trick question", "number or object"], "0"),
 ];
 
-//  current question
-var questionIndex = 0;
-var currentQuestion = questionBank[questionIndex];
 
 // timer !
 
@@ -78,8 +80,8 @@ function setTimer() {
 
 //fn to display question
 function showQuestions() {
-  console.log("currentQuestion", currentQuestion);
   currentQuestion = questionBank[questionIndex];
+  console.log("currentQuestion", currentQuestion);
   //any more questions left?
   //moreQuestions() then create question
   if(currentQuestion) {
@@ -103,6 +105,13 @@ function createQuestionContent() {
     //   checkAnswer(event.target.getAttribute("data-choice"));
     // });
   }
+}
+
+//create End game screen.
+//call this when showing end-screen
+function createEndScreenContent()  {
+  //timeEl.textContent = "Time: " + timeLeft;
+  endScoreEl.textContent = score;
 }
 
 function checkAnswer(choice) {
@@ -211,6 +220,7 @@ function showQuestionScreen() {
   scoreScreenEl.classList.add("hidden");
 }
 function showEndScreen() {
+  createEndScreenContent();
   startScreenEl.classList.add("hidden");
   questionsScreenEl.classList.add("hidden");
   endScreenEl.classList.remove("hidden");
@@ -233,20 +243,21 @@ function handleAnswerClicks(li) {
   // pass the data choice :check answer here 
   }
 
-function getCssClasses(id) {
-  console.log("id to hide/show : ", id, id.classList);
-}
 
-function isElementHidden(id) {
-if(getCssClasses(id).includes('hidden')){
-  console.log(" id: ", id, " is Hidden!!");
-} else {
-  console.log(console.log(" id: ", id, " is NOT HIDDEN!!"));
-}
-}
-function removeHiddenClassName(id) {
-  console.log(isElementHidden(id));
-  id.classList.remove('hidden');
-  console.log();
-}
+// function getCssClasses(id) {
+//   console.log("id to hide/show : ", id, id.classList);
+// }
+
+// function isElementHidden(id) {
+// if(getCssClasses(id).includes('hidden')){
+//   console.log(" id: ", id, " is Hidden!!");
+// } else {
+//   console.log(console.log(" id: ", id, " is NOT HIDDEN!!"));
+// }
+// }
+// function removeHiddenClassName(id) {
+//   console.log(isElementHidden(id));
+//   id.classList.remove('hidden');
+//   console.log();
+// }
   
