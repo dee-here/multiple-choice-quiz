@@ -102,7 +102,7 @@ function checkAnswer(choice) {
   } else {
     console.log("WRONG answer!");
     timeLeft = timeLeft - 5;
-
+  }
   // if(!isGameOver()) {
   //   nextQuestion();
   //   showQuestions();
