@@ -86,9 +86,10 @@ function createQuestionContent() {
     questionchoicesEl[i].textContent = currentQuestion.choices[i];
     questionchoicesEl[i].setAttribute("data-choice", i);
 
-    questionchoicesEl[i].addEventListener("click", function (event) {
-      checkAnswer(event.target.getAttribute("data-choice"));
-    });
+    // remove listener use onAnswerClick fn!
+    // questionchoicesEl[i].addEventListener("click", function (event) {
+    //   checkAnswer(event.target.getAttribute("data-choice"));
+    // });
   }
 }
 
@@ -103,10 +104,14 @@ function checkAnswer(choice) {
     console.log("WRONG answer!");
     timeLeft = timeLeft - 5;
   }
-  // if(!isGameOver()) {
-  //   nextQuestion();
-  //   showQuestions();
-  // }
+  if(!isGameOver()) {
+    nextQuestion();
+    showQuestions();
+  } else {
+    console.log("Game over ");
+    showEndScreen();
+
+  }
 
 }
 
@@ -189,6 +194,14 @@ function showScoresScreen() {
 
 //start the code
 init();
+
+
+function handleAnswerClicks(li) {
+  console.log("handling click for!! : ", li.getAttribute("data-choice"));
+  checkAnswer(li.getAttribute("data-choice"));
+  // pass the data choice :check answer here 
+  }
+  
 
 //psuedo code:
 //get a handle to all elements that need to be modified
