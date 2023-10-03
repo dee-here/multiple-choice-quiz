@@ -20,7 +20,7 @@
             </section>
             <section id="question-screen" class="hidden">
                 <item class="question-container">
-                    <h1 id="question-text"> Question text</h1>
+                    <h1 id="question-text">Question text</h1>
                     <ul id="question-choices">
                         <li onclick="handleAnswerClicks(this)">11</li>
                         <li onclick="handleAnswerClicks(this)">22</li>
@@ -32,8 +32,16 @@
             <section id="end-screen" class="hidden">
                 <h1>All Done !</h1>
                 <p >Your Score is :<span id="end-score"></span></p>
+                <form id="save-score-form">
+                    <label for="initial">Initials:</label>
+                    <input type="text" id="initial" placeholder="D.S" required>
+                    <button type="submit" onclick="saveHighScore(event)">Submit</button>
+                </form>
+                <ul id="highScoreList">HighScores</ul>
             </section>
-            <section id="score-screen" class="hidden">Score screen</section>
+            <section id="score-screen" class="hidden">
+                <ul id="highScoreList">HighScores</ul>
+            </section>
         </section>
         <section id="right">
             <h1 class="time"></h1>

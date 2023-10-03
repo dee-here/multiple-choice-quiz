@@ -1,6 +1,8 @@
 // get handle to DOM elements
 var timeEl = document.querySelector(".time");
 var endScoreEl = document.querySelector("#end-score");
+var highScoreListEl = document.querySelector("#highScoreList");
+var initialsEl = document.querySelector("#initial");
 
 //handle to different sections
 var startScreenEl = document.querySelector("#start-screen");
@@ -14,11 +16,10 @@ var questionchoicesEl = document.querySelectorAll("#question-choices li");
 // var questionTextEl = document.querySelector("#question-text");
 
 // global variables.
-var timeLeft = 30;
+var timeLeft = 75;
 var score;
 //  current question
 var questionIndex = 0;
-//var currentQuestion = questionBank[questionIndex];
 
 
 // object to store question text, options and answer.
@@ -52,14 +53,20 @@ function setTimer() {
       score = timeLeft;
       timeEl.textContent = "Time: " + timeLeft;
     } else {
-      console.log(`STarting time: ${timeLeft}`);
+      console.log(`SCore show :: ${timeLeft}`);
       timeEl.textContent = "Score: " + score;
       clearInterval(timerInterval);
     }
 
     console.log('score is: ', score);
 
-    timeEl.textContent = "Time: " + timeLeft;
+    if(timeLeft >= 0) {
+      timeEl.textContent = "Time: " + timeLeft;
+    } else {
+      timeEl.textContent = 'Dont SHow time!!';
+    }
+
+
 
     if (timeLeft === 0) {
       //end game and take user to enter initial and save score.
@@ -137,7 +144,6 @@ function checkAnswer(choice) {
   } else {
     console.log("Game over ");
     showEndScreen();
-
   }
 
 }
@@ -162,7 +168,8 @@ function moreQuestions() {
 //reset question index and other global varibales!
 function resetQuiz() {
   questionIndex = 0;
-  timeLeft = 30;
+  timeLeft = 75;
+  // score = undefined;
 }
 
 //fn to check if end of game
@@ -177,7 +184,6 @@ function showNextQuestion() {
     //move to next question
     questionIndex++;
     showQuestions();
-
   }
 
 }
@@ -202,9 +208,9 @@ function hideSection(section) {
   section.classList.toggle("hidden");
 }
 //function to toggle display of sections
-function toggleDisplayOfSection(section) {
-  section.classList.toggle("hidden");
-}
+// function toggleDisplayOfSection(section) {
+//   section.classList.toggle("hidden");
+// }
 
 //screens to hide/show
 function showStartScreen() {
@@ -238,11 +244,58 @@ init();
 
 
 function handleAnswerClicks(li) {
-  console.log("handling click for!! : ", li.getAttribute("data-choice"));
-  checkAnswer(li.getAttribute("data-choice"));
-  // pass the data choice :check answer here 
+  if(li) {
+    checkAnswer(li.getAttribute("data-choice"));
   }
+}
 
+function saveHighScore(event) {
+console.log(event);
+event.preventDefault();
+  var savedHighScores;
+  savedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  if(!savedHighScores) {
+    savedHighScores = [];
+  }
+  // if(savedHighScores) {
+  //   savedHighScores = JSON.parse(localStorage.getItem("highScores"));
+  // } else {
+  //   
+  // }
+  var initialsToSave = (initialsEl.value).trim();
+  savedHighScores.push({initialsToSave, score});
+  //console.log("savedHighScores : ", savedHighScores);
+  localStorage.setItem("highScores", JSON.stringify(savedHighScores));
+
+  //after saving take user back to starting screen!
+
+  //display high scores list!
+  showSavedHighScores();
+}
+
+function showSavedHighScores() {
+  var savedHighScoresArray;
+  savedHighScoresArray = JSON.parse(localStorage.getItem("highScores"));
+  if (!savedHighScoresArray) {
+    savedHighScoresArray = [];
+  }
+  // if (savedHighScoresArray) {
+  //   savedHighScoresArray = JSON.parse(localStorage.getItem("highScores"));
+  // } else {
+  //   savedHighScoresArray = [];
+  // }
+  
+  highScoreListEl.innerHTML = "";
+  for(let i=0; i<savedHighScoresArray.length; i++) {
+    var liItem = document.createElement("li");
+    // console.log("liItem: ", liItem);
+    // console.log("array at index: ", savedHighScoresArray[i]);
+    liItem.textContent = savedHighScoresArray[i]?.initialsToSave + " : " + savedHighScoresArray[i]?.score;
+    highScoreListEl.appendChild(liItem);
+    //console.log("returend array is: ", savedHighScoresArray);
+    //liItem.textContent = [];
+  }
+}
 
 // function getCssClasses(id) {
 //   console.log("id to hide/show : ", id, id.classList);
