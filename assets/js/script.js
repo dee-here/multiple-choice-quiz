@@ -258,6 +258,8 @@ function showSavedHighScores() {
   savedHighScoresArray = JSON.parse(localStorage.getItem("highScores"));
   if (!savedHighScoresArray) {
     savedHighScoresArray = [];
+  } else {
+    savedHighScoresArray.sort((a,b) => (b.score - a.score));
   }
 
   highScoreListEl.innerHTML = "";

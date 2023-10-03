@@ -5,7 +5,7 @@ body {
 main {
     display: flex;
     justify-content: center;
-    align-items:start;
+    align-items: start;
     padding: 15px 25px;
 }
 
@@ -16,6 +16,7 @@ main {
     justify-content: flex-start;
     padding: 10px;
 }
+
 #right {
     /* border: 1px solid green; */
     flex: 1;
@@ -23,6 +24,7 @@ main {
     justify-content: flex-end;
     padding: 10px;
 }
+
 #center {
     border: 1px ridge #aaa;
     flex: 2;
@@ -41,14 +43,14 @@ main {
 
 /* hide and display content */
 .hidden {
-    display:none
+    display: none
 }
 
-.question{
+.question {
     border: 1px solid yellow;
 }
 
-h1{
+h1 {
     font-size: 20px;
     margin: 15px 0;
 }
@@ -57,23 +59,24 @@ h1{
     display: flex;
     justify-content: space-between;
 }
-#highScoreList li{
+
+#highScoreList li {
     display: flex;
     justify-content: space-evenly;
     max-width: 250px;
-    /* align-items: center; */
     margin: 5px 0;
     border-bottom: 1px solid #ccc;
     overflow: hidden;
 }
 
-/* #question-screen */
-
-.label, .value {
+.label,
+.value {
     padding: 5px;
 }
+
 .value {
-    font-weight: bold;;
+    font-weight: bold;
+    ;
 }
 
 #left a {
@@ -83,8 +86,9 @@ h1{
 a,
 a:hover,
 a:visited {
-   color: #00009b
+    color: #00009b
 }
+
 a:hover {
     text-decoration: underline;
 }
@@ -98,22 +102,25 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
-    border-radius: 5px;;
+    border-radius: 5px;
+    ;
 }
 
 p {
     margin: 10px 0;
 }
 
-#question-choices li{
-padding: 10px 0;
-list-style-type: decimal;
-margin: 15px;
-margin-left: 25px;
+#question-choices li {
+    padding: 10px 0;
+    list-style-type: decimal;
+    margin: 15px;
+    margin-left: 25px;
 }
 
-#question-choices li:hover{
+#question-choices li:hover {
     color: #2e022e;
     cursor: pointer;
     text-shadow: #555;
+    background-color: #a1a0a0d5;
+    border-radius: 5px;
 }
