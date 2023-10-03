@@ -6,6 +6,7 @@ main {
     display: flex;
     justify-content: center;
     align-items:start;
+    padding: 15px 25px;
 }
 
 
@@ -23,8 +24,10 @@ main {
     padding: 10px;
 }
 #center {
-    border: 1px solid #ccc;
+    border: 1px ridge #aaa;
     flex: 2;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px #555;
 }
 
 
@@ -47,7 +50,7 @@ main {
 
 h1{
     font-size: 20px;
-    margin: 15px;
+    margin: 15px 0;
 }
 
 .high-score-btn-container {
@@ -64,11 +67,17 @@ h1{
     overflow: hidden;
 }
 
+#question-screen
+
 .label, .value {
     padding: 5px;
 }
 .value {
     font-weight: bold;;
+}
+
+#left a {
+    color: #2e022e
 }
 
 a,
@@ -90,4 +99,22 @@ button {
     display: inline-block;
     font-size: 14px;
     border-radius: 5px;;
+}
+
+p {
+    margin: 10px 0;
+}
+
+#question-choices li{
+padding: 10px 0;
+list-style-type: decimal;
+margin: 15px;
+margin-left: 25px;
+}
+
+#question-choices li:hover{
+    color: #2e022e;
+    cursor: pointer;
+    text-shadow: #555;
+    
 }
