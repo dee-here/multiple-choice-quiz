@@ -244,6 +244,8 @@ function saveHighScore(event) {
   savedHighScores.push({ initialsToSave, score });
 
   localStorage.setItem("highScores", JSON.stringify(savedHighScores));
+  //clear users initials after saving it.
+  initialsEl.value = '';
   //take user to high score screen
   showScoresScreen();
 }
