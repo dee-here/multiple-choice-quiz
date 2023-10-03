@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(233, 227, 240);
+    background-color: #e9e3f0;
 }
 
 main {
@@ -9,16 +9,13 @@ main {
     padding: 15px 25px;
 }
 
-
 #left {
-    /* border: 1px solid red; */
     flex: 1;
     justify-content: flex-start;
     padding: 10px;
 }
 
 #right {
-    /* border: 1px solid green; */
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -32,12 +29,9 @@ main {
     box-shadow: 5px 5px 10px #555;
 }
 
-
-
 #center section {
     padding: 10px;
 }
-
 
 /* hide and display content */
 .hidden {
@@ -76,6 +70,7 @@ h1 {
     font-weight: bold;
 }
 
+/* Make the name span wider to handle long names! */
 li span:nth-child(2) {
     width: 200px;
 }
