@@ -106,11 +106,6 @@ function createQuestionContent() {
   for (let i = 0; i < questionchoicesEl.length; i++) {
     questionchoicesEl[i].textContent = currentQuestion.choices[i];
     questionchoicesEl[i].setAttribute("data-choice", i);
-
-    // remove listener use onAnswerClick fn!
-    // questionchoicesEl[i].addEventListener("click", function (event) {
-    //   checkAnswer(event.target.getAttribute("data-choice"));
-    // });
   }
 }
 
@@ -170,7 +165,7 @@ function moreQuestions() {
 function resetQuiz() {
   questionIndex = 0;
   timeLeft = 75;
-  // score = undefined;
+  timeEl.textContent = "";
 }
 
 //fn to check if end of game
@@ -238,7 +233,15 @@ function showScoresScreen() {
   questionsScreenEl.classList.add("hidden");
   endScreenEl.classList.add("hidden");
   scoreScreenEl.classList.remove("hidden");
+  showSavedHighScores()
 }
+
+// function showHighScoresScreen() {
+//   startScreenEl.classList.add("hidden");
+//   questionsScreenEl.classList.add("hidden");
+//   endScreenEl.classList.add("hidden");
+//   scoreScreenEl.classList.remove("hidden");
+// }
 
 //start the code
 init();
@@ -251,7 +254,7 @@ function handleAnswerClicks(li) {
 }
 
 function saveHighScore(event) {
-console.log(event);
+// console.log(event);
 event.preventDefault();
   var savedHighScores;
   savedHighScores = JSON.parse(localStorage.getItem("highScores"));
@@ -271,8 +274,15 @@ event.preventDefault();
   //after saving take user back to starting screen!
 
   //display high scores list!
-  showSavedHighScores();
+  // showSavedHighScores();
+
+  //take user to high score screen
+  showScoresScreen();
+
 }
+
+
+
 
 function showSavedHighScores() {
   var savedHighScoresArray;
@@ -291,27 +301,27 @@ function showSavedHighScores() {
     var liItem = document.createElement("li");
     // console.log("liItem: ", liItem);
     // console.log("array at index: ", savedHighScoresArray[i]);
-    liItem.textContent = savedHighScoresArray[i]?.initialsToSave + " : " + savedHighScoresArray[i]?.score;
+    //liItem.textContent = "Initials: "+ savedHighScoresArray[i]?.initialsToSave + "      Score: " + savedHighScoresArray[i]?.score;
+    liItem.innerHTML = `<span class="label">Initials:</span><span class="value">${savedHighScoresArray[i]?.initialsToSave}</span>
+     <span class="label">Score:</span><span class="value">${savedHighScoresArray[i]?.score}</span>`;
     highScoreListEl.appendChild(liItem);
     //console.log("returend array is: ", savedHighScoresArray);
     //liItem.textContent = [];
   }
 }
 
-// function getCssClasses(id) {
-//   console.log("id to hide/show : ", id, id.classList);
-// }
+function restartQuiz(event) {
+  event.preventDefault();
+  resetQuiz();
+  init();
+}
 
-// function isElementHidden(id) {
-// if(getCssClasses(id).includes('hidden')){
-//   console.log(" id: ", id, " is Hidden!!");
-// } else {
-//   console.log(console.log(" id: ", id, " is NOT HIDDEN!!"));
-// }
-// }
-// function removeHiddenClassName(id) {
-//   console.log(isElementHidden(id));
-//   id.classList.remove('hidden');
-//   console.log();
-// }
-  
+function clearHighScores(event) {
+  event.preventDefault();
+  localStorage.clear();
+  showSavedHighScores();
+}
+
+function displayHighScoreScreen() {
+
+}
