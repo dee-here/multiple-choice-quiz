@@ -93,11 +93,6 @@ function setTimer() {
     } else {
       clearInterval(timerInterval);
     }
-    if (timeLeft >= 0) {
-      timeEl.textContent = "Time: " + timeLeft;
-    } else {
-      timeEl.textContent = "Dont SHow time!!";
-    }
 
     if (timeLeft === 0) {
       //end game and take user to enter initial and save score.

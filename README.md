@@ -35,7 +35,7 @@ On this High Scores screen, the user can also clear the saved high scores using 
 ## Screenshots
 <img src="./assets/images/Start.png" height="200">
 <img src="./assets/images/Questions.png" height="200">
-<img src="./assets/images/high-scores.png" height="200">
+<img src="./assets/images/high-score.png" height="200">
 
 
 ## Author Info
