@@ -67,7 +67,7 @@ h1{
     overflow: hidden;
 }
 
-#question-screen
+/* #question-screen */
 
 .label, .value {
     padding: 5px;
@@ -116,5 +116,4 @@ margin-left: 25px;
     color: #2e022e;
     cursor: pointer;
     text-shadow: #555;
-    
 }

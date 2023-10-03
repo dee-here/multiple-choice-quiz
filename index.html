@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,20 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
-    <!-- <header> template!!
-    </header> -->
-    <main class="">
+    <main>
         <section id="left"><a onclick="showScoresScreen()" href="#">View High Scores</a></section>
         <section id="center">
             <section id="start-screen" class="hidden">
                 <h1>Coding Quiz Challenge</h1>
                 <p>Try to answer the following code-related questions within the time limit.
-                Keep in mind that incorrect answers will penalize your score/time by ten seconds.
+                    Keep in mind that incorrect answers will penalize your score/time by ten seconds.
                 </p>
                 <p>Good Luck..</p>
-                <br/><br/>
+                <br /><br />
                 <button onclick="startQuiz()">Start Quiz</button>
-                <br/><br/>
+                <br /><br />
             </section>
             <section id="question-screen" class="hidden">
                 <item class="question-container">
@@ -36,7 +36,7 @@
             </section>
             <section id="end-screen" class="hidden">
                 <h1>All Done !</h1>
-                <p >Your Score is :<span id="end-score"></span></p>
+                <p>Your Score is :<span id="end-score"></span></p>
                 <form id="save-score-form">
                     <label for="initial">Initials:</label>
                     <input type="text" id="initial" placeholder="D.S" required>
@@ -46,7 +46,7 @@
             <section id="score-screen" class="hidden">
                 <h1>High Scores</h1>
                 <ul id="highScoreList">HighScores</ul>
-                <br/>
+                <br />
                 <div class="high-score-btn-container">
                     <button onclick="restartQuiz(event)">Restart Quiz</button>
                     <button onclick="clearHighScores(event)">Clear High Scores</button>
