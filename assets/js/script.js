@@ -32,7 +32,7 @@ class Question {
 }
 
 var questionBank = [
-  new Question("Inside which HTML element do we put the JavaScript?", ["<js>", "<script>", "<javascript>", "<scripting>"], "1"),
+  new Question("Which HTML element do we put JavaScript in?", ["<js>", "<script>", "<javascript>", "<scripting>"], "1"),
   new Question("Where is the correct place to insert a JavaScript?", ["header", "footer", "main", "body"], "3"),
   new Question("How do you write 'Hello World' in an alert box", ["alert('Hello World')", "msgBox('Hello World')", "msg('Hello World')", "alerttBox('Hello World')"], "0"),
   new Question("How to write an IF statement in Javascript", ["if(i==5)", "if i = 5 then", "if i == 5 then", "if i = 5"], "0"),
@@ -138,12 +138,13 @@ function checkAnswer(choice) {
     }
     // timeLeft = timeLeft - 5;
   }
-  if(!isGameOver()) {
-    nextQuestion();
-    showQuestions();
-  } else {
+  nextQuestion();
+  if(isGameOver()) {
     console.log("Game over ");
     showEndScreen();
+    
+  } else {
+    showQuestions();
   }
 
 }
@@ -175,8 +176,8 @@ function resetQuiz() {
 //fn to check if end of game
 function isGameOver() {
   //if timer ==- 0 or no more questions => Quiz over
-  console.log("is game over: ", timeLeft <= 0 || !moreQuestions());
-  return (timeLeft <= 0 || !moreQuestions());
+  console.log("is game over: ", timeLeft <= 0 || !questionBank[questionIndex]);
+  return (timeLeft <= 0 || !questionBank[questionIndex]);
 }
 
 function showNextQuestion() {
